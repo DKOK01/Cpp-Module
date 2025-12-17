@@ -6,13 +6,13 @@
 class PhoneBook
 {
 private:
-	Contact	_contacts[8];
-	int		_contactCount;
-	int		_oldestIndex;
+	Contact	contacts[8];
+	int		contactCount;
+	int		oldestIndex;
 
-	std::string	_formatField(const std::string& field) const;
-	void		_displayContactRow(int index) const;
-	void		_displayContactDetails(int index) const;
+	std::string	formatField(const std::string& field) const;
+	void		displayContactRow(int index) const;
+	void		displayContactDetails(int index) const;
 
 public:
 	PhoneBook();

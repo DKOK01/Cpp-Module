@@ -3,56 +3,52 @@
 #include <iomanip>
 #include <sstream>
 
-PhoneBook::PhoneBook() : _contactCount(0), _oldestIndex(0)
-{
-}
+PhoneBook::PhoneBook() : contactCount(0), oldestIndex(0) {}
 
-PhoneBook::~PhoneBook()
-{
-}
+PhoneBook::~PhoneBook() {}
 
-std::string	PhoneBook::_formatField(const std::string& field) const
+std::string	PhoneBook::formatField(const std::string& field) const
 {
 	if (field.length() > 10)
 		return field.substr(0, 9) + ".";
 	return field;
 }
 
-void	PhoneBook::_displayContactRow(int index) const
+void	PhoneBook::displayContactRow(int index) const
 {
 	std::cout << "|" << std::setw(10) << index;
-	std::cout << "|" << std::setw(10) << _formatField(_contacts[index].getFirstName());
-	std::cout << "|" << std::setw(10) << _formatField(_contacts[index].getLastName());
-	std::cout << "|" << std::setw(10) << _formatField(_contacts[index].getNickname());
+	std::cout << "|" << std::setw(10) << formatField(contacts[index].getFirstName());
+	std::cout << "|" << std::setw(10) << formatField(contacts[index].getLastName());
+	std::cout << "|" << std::setw(10) << formatField(contacts[index].getNickname());
 	std::cout << "|" << std::endl;
 }
 
-void	PhoneBook::_displayContactDetails(int index) const
+void	PhoneBook::displayContactDetails(int index) const
 {
-	std::cout << "First Name: " << _contacts[index].getFirstName() << std::endl;
-	std::cout << "Last Name: " << _contacts[index].getLastName() << std::endl;
-	std::cout << "Nickname: " << _contacts[index].getNickname() << std::endl;
-	std::cout << "Phone Number: " << _contacts[index].getPhoneNumber() << std::endl;
-	std::cout << "Darkest Secret: " << _contacts[index].getDarkestSecret() << std::endl;
+	std::cout << "First Name: " << contacts[index].getFirstName() << std::endl;
+	std::cout << "Last Name: " << contacts[index].getLastName() << std::endl;
+	std::cout << "Nickname: " << contacts[index].getNickname() << std::endl;
+	std::cout << "Phone Number: " << contacts[index].getPhoneNumber() << std::endl;
+	std::cout << "Darkest Secret: " << contacts[index].getDarkestSecret() << std::endl;
 }
 
 void	PhoneBook::addContact(const Contact& contact)
 {
-	if (_contactCount < 8)
+	if (contactCount < 8)
 	{
-		_contacts[_contactCount] = contact;
-		_contactCount++;
+		contacts[contactCount] = contact;
+		contactCount++;
 	}
 	else
 	{
-		_contacts[_oldestIndex] = contact;
-		_oldestIndex = (_oldestIndex + 1) % 8;
+		contacts[oldestIndex] = contact;
+		oldestIndex = (oldestIndex + 1) % 8;
 	}
 }
 
 void	PhoneBook::searchContacts() const
 {
-	if (_contactCount == 0)
+	if (contactCount == 0)
 	{
 		std::cout << "PhoneBook is empty!" << std::endl;
 		return;
@@ -64,10 +60,10 @@ void	PhoneBook::searchContacts() const
 	std::cout << "|" << std::setw(10) << "Nickname";
 	std::cout << "|" << std::endl;
 
-	for (int i = 0; i < _contactCount; i++)
+	for (int i = 0; i < contactCount; i++)
 	{
-		if (!_contacts[i].isEmpty())
-			_displayContactRow(i);
+		if (!contacts[i].isEmpty())
+			displayContactRow(i);
 	}
 
 	std::cout << "Enter index of contact to display: ";
@@ -86,11 +82,11 @@ void	PhoneBook::searchContacts() const
 		return;
 	}
 
-	if (index < 0 || index >= _contactCount || _contacts[index].isEmpty())
+	if (index < 0 || index >= contactCount || contacts[index].isEmpty())
 	{
 		std::cout << "Invalid index!" << std::endl;
 		return;
 	}
 
-	_displayContactDetails(index);
+	displayContactDetails(index);
 }
