@@ -1,5 +1,5 @@
-CC      = c++
-FLAGS   = -Wall -Wextra -Werror -std=c++98
+CXX      = c++
+CXXFLAGS   = -Wall -Wextra -Werror -std=c++98
 
 NAME    = megaphone
 SRC     = megaphone.cpp
