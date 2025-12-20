@@ -4,24 +4,25 @@
 
 int main()
 {
-	Weapon club("crude spiked club");
+	{
+		Weapon club("crude spiked club	");
 
-	HumanA bob("Bob", club);  // Weapon passed to constructor
-	bob.attack();
+		HumanA bob("Bob", club);  // Weapon passed to constructor
+		bob.attack();
 
-	club.setType("some other type of club");  // Change weapon type
-	bob.attack();  // Bob sees the change! (reference to same weapon)
+		club.setType("some other type of club");  // Change weapon type
+		bob.attack();  // Bob sees the change! (reference to same weapon)
+	}
 
-
-
-	Weapon club("crude spiked club");
-
-	HumanB jim("Jim");      // No weapon yet
-	jim.setWeapon(club);    // Give weapon later
-	jim.attack();
-
-	club.setType("some other type of club");  // Change weapon type
-	jim.attack();  // Jim sees the change! (pointer to same weapon)
+	{
+		Weapon club("crude spiked club");
+	
+		HumanB jim("Jim");      // No weapon yet
+		jim.setWeapon(club);    // Give weapon later
+		jim.attack();
+		club.setType("some other type of club");  // Change weapon type
+		jim.attack();  // Jim sees the change! (pointer to same weapon)
+	}
 
 	return 0;
 }
