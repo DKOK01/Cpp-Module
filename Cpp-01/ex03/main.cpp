@@ -18,6 +18,7 @@ int main()
 		Weapon club("crude spiked club");
 	
 		HumanB jim("Jim");      // No weapon yet
+		jim.attack();
 		jim.setWeapon(club);    // Give weapon later
 		jim.attack();
 		club.setType("some other type of club");  // Change weapon type
