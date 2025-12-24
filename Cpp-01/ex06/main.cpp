@@ -38,6 +38,7 @@ int main(int argc, char **argv)
 			std::cout << std::endl;
 		case 3:
 			harl.complain("ERROR");
+            std::cout << std::endl;
 			break;
 		default:
 			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
