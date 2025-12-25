@@ -49,3 +49,14 @@ You are not coding in C anymore. Time to C++! Therefore:
 - Sometimes, the guidelines of an exercise look short but the examples can show requirements that are not explicitly written in the instructions.
 
 - **Read each module completely before starting!** Really, do it.
+
+## New rules
+- From now on, all your classes must be designed in the Orthodox Canonical Form,
+unless explicitly stated otherwise. They will then implement the four required member
+functions below:
+-  Default constructor
+-  Copy constructor
+-  Copy assignment operator
+-  Destructor
+- Split your class code into two files. The header file (.hpp/.h) contains the class
+definition, whereas the source file (.cpp) contains the implementation.
