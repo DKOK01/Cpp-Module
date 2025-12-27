@@ -1,15 +1,12 @@
 #include "Fixed.hpp"
 #include <iostream>
 
-// Default constructor
 Fixed::Fixed() : _value(0) {
 	std::cout << "Default constructor called" << std::endl;
 }
 
-// Copy constructor
-Fixed::Fixed(const Fixed& other) {
+Fixed::Fixed(const Fixed& other) : _value(other._value) {
 	std::cout << "Copy constructor called" << std::endl;
-	*this = other;
 }
 
 // Copy assignment operator
