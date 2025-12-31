@@ -22,16 +22,18 @@ Fixed::Fixed(const Fixed& other) : _value(other._value) {
 	std::cout << "Copy constructor called" << std::endl;
 }
 
+Fixed::~Fixed() {
+	std::cout << "Destructor called" << std::endl;
+}
+
+
+// Copy assignment operator
 Fixed& Fixed::operator=(const Fixed& other) {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other) {
 		this->_value = other._value;
 	}
 	return *this;
-}
-
-Fixed::~Fixed() {
-	std::cout << "Destructor called" << std::endl;
 }
 
 
