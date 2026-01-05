@@ -2,50 +2,50 @@
 
 int main() {
 	
-	std::cout << "=== Test 1: Attack Function ===" << std::endl;
+	std::cout << std::endl << "=== Test 1: Attack Function ===" << std::endl;
 	{
-		ClapTrap clap2("Attacker");
-		clap2.attack("Target1");
-		clap2.attack("Target2");
-		clap2.attack("Target3");
+		ClapTrap Attacker("Attacker");
+		Attacker.attack("Target1");
+		Attacker.attack("Target2");
+		Attacker.attack("Target3");
 	}
 	std::cout << std::endl;
 
 	std::cout << "=== Test 2: Take Damage ===" << std::endl;
 	{
-		ClapTrap clap3("Tank");
-		clap3.takeDamage(3);
-		clap3.takeDamage(5);
-		clap3.takeDamage(10); // Should be destroyed
-		clap3.takeDamage(5);  // Already destroyed
+		ClapTrap Tank("Tank");
+		Tank.takeDamage(3);
+		Tank.takeDamage(5);
+		Tank.takeDamage(10); // Should be destroyed
+		Tank.takeDamage(5);  // Already destroyed
 	}
 	std::cout << std::endl;
 
 	std::cout << "=== Test 3: Repair Function ===" << std::endl;
 	{
-		ClapTrap clap4("Healer");
-		clap4.takeDamage(5);
-		clap4.beRepaired(3);
-		clap4.beRepaired(3); // Should not exceed max hit points
-		clap4.beRepaired(5); // Should not exceed max hit points
+		ClapTrap Healer("Healer");
+		Healer.takeDamage(5);
+		Healer.beRepaired(3);
+		Healer.beRepaired(3); // Should not exceed max hit points
+		Healer.beRepaired(5); // Should not exceed max hit points
 	}
 	std::cout << std::endl;
 
 	std::cout << "=== Test 4: Energy Depletion (Attack) ===" << std::endl;
 	{
-		ClapTrap clap5("Exhausted");
+		ClapTrap Exhausted("Exhausted");
 		for (int i = 0; i < 12; i++) {
-			clap5.attack("Enemy");
+			Exhausted.attack("Enemy");
 		}
 	}
 	std::cout << std::endl;
 
 	std::cout << "=== Test 5: Energy Depletion (Repair) ===" << std::endl;
 	{
-		ClapTrap clap6("Tired");
-		clap6.takeDamage(9);
+		ClapTrap Tired("Tired");
+		Tired.takeDamage(9);
 		for (int i = 0; i < 11; i++) {
-			clap6.beRepaired(1);
+			Tired.beRepaired(1);
 		}
 	}
 	std::cout << std::endl;
