@@ -1,24 +1,20 @@
 #include "ClapTrap.hpp"
 
-// Default constructor
 ClapTrap::ClapTrap ()
 	: _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
 	std::cout << "ClapTrap " << _name << " default constructor called" << std::endl;
 }
 
-// Parameterized constructor
 ClapTrap::ClapTrap (const std::string& name) 
 	: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
 	std::cout << "ClapTrap " << _name << " parameterized constructor called" << std::endl;
 }
 
-// Copy constructor
 ClapTrap::ClapTrap(const ClapTrap& other) {
 	std::cout << "ClapTrap copy constructor called" << std::endl;
 	*this = other;
 }
 
-// Copy assignment operator
 ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
 	std::cout << "ClapTrap copy assignment operator called" << std::endl;
 	if (this != &other) {
@@ -30,12 +26,12 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
 	return *this;
 }
 
-// Destructor
 ClapTrap::~ClapTrap() {
 	std::cout << "ClapTrap " << _name << " destructor called" << std::endl;
 }
 
-// Attack function
+
+
 void ClapTrap::attack(const std::string& target) {
 	if (_hitPoints == 0) {
 		std::cout << "ClapTrap " << _name << " cannot attack because it has no hit points left!" << std::endl;
@@ -51,7 +47,6 @@ void ClapTrap::attack(const std::string& target) {
 			  << ", causing " << _attackDamage << " points of damage!" << std::endl;
 }
 
-// Take damage function
 void ClapTrap::takeDamage(unsigned int amount) {
 	if (_hitPoints == 0) {
 		std::cout << "ClapTrap " << _name << " is already destroyed!" << std::endl;
@@ -69,7 +64,6 @@ void ClapTrap::takeDamage(unsigned int amount) {
 	}
 }
 
-// Be repaired function
 void ClapTrap::beRepaired(unsigned int amount) {
 	if (_hitPoints == 0) {
 		std::cout << "ClapTrap " << _name << " cannot be repaired because it is destroyed!" << std::endl;
