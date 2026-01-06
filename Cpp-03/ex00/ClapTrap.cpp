@@ -74,13 +74,6 @@ void ClapTrap::beRepaired(unsigned int amount) {
 		return;
 	}
 	_energyPoints--;
-	if (_hitPoints == 10) {
-		std::cout << YELLOW << "ClapTrap " << _name << " is already at full health!" << RESET << std::endl;
-		return;
-	}
-	if (_hitPoints + amount > 10) {
-		amount = 10 - _hitPoints;
-	}
 	_hitPoints += amount;
 	std::cout << GREEN << "ClapTrap " << _name << " repairs itself for " << amount 
 			  << " hit points! (" << _hitPoints << " HP total)" << RESET << std::endl;

@@ -26,8 +26,7 @@ int main() {
 		ClapTrap Healer("Healer");
 		Healer.takeDamage(5);
 		Healer.beRepaired(3);
-		Healer.beRepaired(3); // Should not exceed max hit points
-		Healer.beRepaired(5); // Should not exceed max hit points
+		Healer.beRepaired(2);
 	}
 	std::cout << std::endl;
 
