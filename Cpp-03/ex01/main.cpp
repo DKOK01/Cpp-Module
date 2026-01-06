@@ -6,10 +6,7 @@ int main() {
 	std::cout << std::endl << "=== Test 1: ScavTrap Construction/Destruction Chaining ===" << std::endl;
 	{
 		ScavTrap scav("Guardian");
-		std::cout << "(ScavTrap created)" << std::endl;
 	}
-	std::cout << "(Note: ClapTrap constructor called first, then ScavTrap constructor)" << std::endl;
-	std::cout << "(Destruction in reverse order: ScavTrap destructor, then ClapTrap destructor)" << std::endl;
 	std::cout << std::endl;
 
 	std::cout << "=== Test 2: ScavTrap Attack Function ===" << std::endl;
@@ -26,8 +23,8 @@ int main() {
 		ScavTrap tank("Tank");
 		tank.takeDamage(30);
 		tank.takeDamage(50);
-		tank.takeDamage(25); // Should be destroyed (100 total)
-		tank.takeDamage(10); // Already destroyed
+		tank.takeDamage(25);
+		tank.takeDamage(10);
 	}
 	std::cout << std::endl;
 
@@ -63,13 +60,17 @@ int main() {
 	{
 		std::cout << "Creating ClapTrap:" << std::endl;
 		ClapTrap clap("Clappy");
+
 		std::cout << "\nCreating ScavTrap:" << std::endl;
 		ScavTrap scav("Scavvy");
 		
 		std::cout << "\nClapTrap attack:" << std::endl;
 		clap.attack("Target");
+		scav.takeDamage(0);
+
 		std::cout << "\nScavTrap attack:" << std::endl;
 		scav.attack("Target");
+		clap.takeDamage(20);
 		
 		std::cout << "\nScavTrap special ability:" << std::endl;
 		scav.guardGate();

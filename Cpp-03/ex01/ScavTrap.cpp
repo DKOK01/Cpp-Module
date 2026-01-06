@@ -30,6 +30,8 @@ ScavTrap::~ScavTrap() {
 	std::cout << GREEN << "ScavTrap " << _name << " destructor called" << RESET << std::endl;
 }
 
+
+
 void ScavTrap::attack(const std::string& target) {
 	if (_hitPoints == 0) {
 		std::cout << RED << "ScavTrap " << _name << " cannot attack because it has no hit points left!" << RESET << std::endl;
