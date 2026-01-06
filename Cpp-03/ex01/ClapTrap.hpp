@@ -27,9 +27,6 @@ public:
 	ClapTrap(const ClapTrap& other);
 	ClapTrap& operator=(const ClapTrap& other);
 	~ClapTrap();
-    void setName(std::string name){
-		_name = name;
-	};
 
 	void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
