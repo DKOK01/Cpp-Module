@@ -48,7 +48,7 @@ int main() {
 	}
 	std::cout << std::endl;
 
-	std::cout << "=== Test 7: ScavTrap vs FragTrap Comparison ===" << std::endl;
+	std::cout << "=== Test 6: ScavTrap vs FragTrap Comparison ===" << std::endl;
 	{
 
 		std::cout << "\nCreating ScavTrap:" << std::endl;
