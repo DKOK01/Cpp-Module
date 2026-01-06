@@ -48,22 +48,8 @@ int main() {
 	}
 	std::cout << std::endl;
 
-	std::cout << "=== Test 6: FragTrap Energy Depletion ===" << std::endl;
+	std::cout << "=== Test 7: ScavTrap vs FragTrap Comparison ===" << std::endl;
 	{
-		FragTrap energetic("Marathon");
-		for (int i = 0; i < 102; i++) {
-			if (i == 99)
-				std::cout << "... (continuing until energy depletes) ..." << std::endl;
-			if (i >= 99)
-				energetic.attack("Enemy");
-		}
-	}
-	std::cout << std::endl;
-
-	std::cout << "=== Test 7: ClapTrap vs ScavTrap vs FragTrap Comparison ===" << std::endl;
-	{
-		std::cout << "Creating ClapTrap:" << std::endl;
-		ClapTrap clap("Clappy");
 
 		std::cout << "\nCreating ScavTrap:" << std::endl;
 		ScavTrap scav("Scavvy");
@@ -71,42 +57,20 @@ int main() {
 		std::cout << "\nCreating FragTrap:" << std::endl;
 		FragTrap frag("Fraggy");
 		
-		std::cout << "\nClapTrap attack (0 damage):" << std::endl;
-		clap.attack("Target");
-
 		std::cout << "\nScavTrap attack (20 damage):" << std::endl;
 		scav.attack("Target");
+		frag.takeDamage(20);
 		
 		std::cout << "\nFragTrap attack (30 damage):" << std::endl;
 		frag.attack("Target");
+		scav.takeDamage(30);
 
 		std::cout << "\nScavTrap special ability:" << std::endl;
 		scav.guardGate();
 		
 		std::cout << "\nFragTrap special ability:" << std::endl;
 		frag.highFivesGuys();
-	}
-	std::cout << std::endl;
-
-	std::cout << "=== Test 8: FragTrap Copy Constructor ===" << std::endl;
-	{
-		FragTrap original("Original");
-		original.takeDamage(30);
-		
-		std::cout << "\nCopying FragTrap:" << std::endl;
-		FragTrap copy(original);
-		
-		std::cout << "\nCopy attacking:" << std::endl;
-		copy.attack("Enemy");
-	}
-	std::cout << std::endl;
-
-	std::cout << "=== Test 9: FragTrap Multiple High Fives ===" << std::endl;
-	{
-		FragTrap enthusiast("Hyper");
-		for (int i = 0; i < 3; i++) {
-			enthusiast.highFivesGuys();
-		}
+		std::cout << std::endl;
 	}
 	std::cout << std::endl;
 
