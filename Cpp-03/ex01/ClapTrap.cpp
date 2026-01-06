@@ -1,0 +1,80 @@
+#include "ClapTrap.hpp"
+
+ClapTrap::ClapTrap ()
+	: _name("Default"), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+	std::cout << BLUE << "ClapTrap " << _name << " default constructor called" << RESET << std::endl;
+}
+
+ClapTrap::ClapTrap (const std::string& name) 
+	: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+	std::cout << BLUE << "ClapTrap " << _name << " parameterized constructor called" << RESET << std::endl;
+}
+
+ClapTrap::ClapTrap(const ClapTrap& other) {
+	std::cout << BLUE << "ClapTrap copy constructor called" << RESET << std::endl;
+	*this = other;
+}
+
+ClapTrap& ClapTrap::operator=(const ClapTrap& other) {
+	std::cout << BLUE << "ClapTrap copy assignment operator called" << RESET << std::endl;
+	if (this != &other) {
+		_name = other._name;
+		_hitPoints = other._hitPoints;
+		_energyPoints = other._energyPoints;
+		_attackDamage = other._attackDamage;
+	}
+	return *this;
+}
+
+ClapTrap::~ClapTrap() {
+	std::cout << BLUE << "ClapTrap " << _name << " destructor called" << RESET << std::endl;
+}
+
+
+
+void ClapTrap::attack(const std::string& target) {
+	if (_hitPoints == 0) {
+		std::cout << RED << "ClapTrap " << _name << " cannot attack because it has no hit points left!" << RESET << std::endl;
+		return;
+	}
+	if (_energyPoints == 0) {
+		std::cout << YELLOW << "ClapTrap " << _name << " cannot attack because it has no energy points left!" << RESET << std::endl;
+		return;
+	}
+
+	_energyPoints--;
+	std::cout << CYAN << "ClapTrap " << _name << " attacks " << target 
+			  << ", causing " << _attackDamage << " points of damage!" << RESET << std::endl;
+}
+
+void ClapTrap::takeDamage(unsigned int amount) {
+	if (_hitPoints == 0) {
+		std::cout << RED << "ClapTrap " << _name << " is already destroyed!" << RESET << std::endl;
+		return;
+	}
+	
+	if (amount >= _hitPoints) {
+		_hitPoints = 0;
+		std::cout << RED << BOLD << "ClapTrap " << _name << " takes " << amount 
+				  << " points of damage and is destroyed!" << RESET << std::endl;
+	} else {
+		_hitPoints -= amount;
+		std::cout << MAGENTA << "ClapTrap " << _name << " takes " << amount 
+				  << " points of damage! (" << _hitPoints << " HP remaining)" << RESET << std::endl;
+	}
+}
+
+void ClapTrap::beRepaired(unsigned int amount) {
+	if (_hitPoints == 0) {
+		std::cout << RED << "ClapTrap " << _name << " cannot be repaired because it is destroyed!" << RESET << std::endl;
+		return;
+	}
+	if (_energyPoints == 0) {
+		std::cout << YELLOW << "ClapTrap " << _name << " cannot be repaired because it has no energy points left!" << RESET << std::endl;
+		return;
+	}
+	_energyPoints--;
+	_hitPoints += amount;
+	std::cout << GREEN << "ClapTrap " << _name << " repairs itself for " << amount 
+			  << " hit points! (" << _hitPoints << " HP total)" << RESET << std::endl;
+}
