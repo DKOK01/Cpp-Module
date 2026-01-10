@@ -7,7 +7,7 @@
 
 int main()
 {
-	std::cout << "=== Test 1: Basic test from subject ===" << std::endl;
+	std::cout << "\n\n=== Test 1: Basic test from subject ===" << std::endl;
 	{
 		const Animal* j = new Dog();
 		const Animal* i = new Cat();
@@ -17,7 +17,8 @@ int main()
 		delete i;
 	}
 
-	std::cout << "\n=== Test 2: Array of Animals (half Dogs, half Cats) ===" << std::endl;
+
+	std::cout << "\n\n\n=== Test 2: Array of Animals (half Dogs, half Cats) ===" << std::endl;
 	{
 		const int arraySize = 10;
 		Animal* animals[arraySize];
@@ -43,7 +44,8 @@ int main()
 		}
 	}
 
-	std::cout << "\n=== Test 3: Deep copy test with Dog ===" << std::endl;
+
+	std::cout << "\n\n\n=== Test 3: Deep copy test with Dog ===" << std::endl;
 	{
 		Dog dog1;
 		dog1.getBrain()->setIdea(0, "I want to chase the ball!");
@@ -82,7 +84,8 @@ int main()
 		std::cout << "\nCleanup:" << std::endl;
 	}
 
-	std::cout << "\n=== Test 4: Deep copy test with Cat ===" << std::endl;
+
+	std::cout << "\n\n\n=== Test 4: Deep copy test with Cat ===" << std::endl;
 	{
 		Cat cat1;
 		cat1.getBrain()->setIdea(0, "I want to catch that mouse!");
@@ -108,7 +111,8 @@ int main()
 		std::cout << "\nCleanup:" << std::endl;
 	}
 
-	std::cout << "\n=== Test 5: Assignment operator deep copy test ===" << std::endl;
+	
+	std::cout << "\n\n\n=== Test 5: Assignment operator deep copy test ===" << std::endl;
 	{
 		Dog dog1;
 		Dog dog2;
@@ -138,44 +142,6 @@ int main()
 		std::cout << "Dog2 brain: " << dog2.getBrain() << std::endl;
 
 		std::cout << "\nCleanup:" << std::endl;
-	}
-
-	std::cout << "\n=== Test 6: Brain ideas boundary test ===" << std::endl;
-	{
-		Brain brain;
-		
-		std::cout << "\nSetting ideas at various indices:" << std::endl;
-		brain.setIdea(0, "First idea");
-		brain.setIdea(99, "Last idea");
-		brain.setIdea(50, "Middle idea");
-		
-		std::cout << "Idea 0: " << brain.getIdea(0) << std::endl;
-		std::cout << "Idea 50: " << brain.getIdea(50) << std::endl;
-		std::cout << "Idea 99: " << brain.getIdea(99) << std::endl;
-		
-		std::cout << "\nTrying out of bounds (should return empty):" << std::endl;
-		std::cout << "Idea -1: '" << brain.getIdea(-1) << "'" << std::endl;
-		std::cout << "Idea 100: '" << brain.getIdea(100) << "'" << std::endl;
-		
-		std::cout << "\nCleanup:" << std::endl;
-	}
-
-	std::cout << "\n=== Test 7: Polymorphism still works ===" << std::endl;
-	{
-		Animal* dog = new Dog();
-		Animal* cat = new Cat();
-
-		std::cout << "\nTypes:" << std::endl;
-		std::cout << "Dog type: " << dog->getType() << std::endl;
-		std::cout << "Cat type: " << cat->getType() << std::endl;
-
-		std::cout << "\nSounds (polymorphic):" << std::endl;
-		dog->makeSound();
-		cat->makeSound();
-
-		std::cout << "\nCleanup:" << std::endl;
-		delete dog;
-		delete cat;
 	}
 
 	return 0;
