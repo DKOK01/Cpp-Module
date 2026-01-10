@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/YOUR_USERNAME/Cpp-Module?color=lightblue" />
+    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/DKOK01/Cpp-Module?color=lightblue" />
     <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/YOUR_USERNAME/Cpp-Module?color=blue" />
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/YOUR_USERNAME/Cpp-Module?color=green" />
 </p>
