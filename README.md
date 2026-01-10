@@ -7,6 +7,11 @@
 </p>
 
 <p align="center">
+    <img src="https://img.shields.io/badge/42-aysadeq-000000?style=for-the-badge&logo=42&logoColor=white" />
+    <img src="https://img.shields.io/badge/C++-98-00599C?style=for-the-badge&logo=cplusplus&logoColor=white" />
+</p>
+
+<p align="center">
     <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/DKOK01/Cpp-Module?color=lightblue" />
     <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/DKOK01/Cpp-Module?color=blue" />
     <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/DKOK01/Cpp-Module?color=green" />
@@ -33,7 +38,7 @@ The **C++ Modules** are a series of projects at **42 School** designed to introd
 ## 📊 Progress
 
 | Module | Topics |
-|:------:|:------:|
+|:------:|:-------|
 | [CPP00](./Cpp-00) | Namespaces, classes, member functions, stdio streams |
 | [CPP01](./Cpp-01) | Memory allocation, pointers to members, references |
 | [CPP02](./Cpp-02) | Ad-hoc polymorphism, operator overloading, canonical form |
@@ -52,7 +57,7 @@ The **C++ Modules** are a series of projects at **42 School** designed to introd
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/Cpp-Module.git
+git clone https://github.com/DKOK01/Cpp-Module.git
 cd Cpp-Module
 
 # Navigate to any exercise
@@ -76,8 +81,9 @@ make
 |----------|-------------|
 | ex00 | Megaphone - String to uppercase |
 | ex01 | PhoneBook - Contact management with classes |
+| ex02 | Account - Recreating a lost implementation from logs |
 
-**Key concepts:** `std::string`, `std::cin`, `std::cout`, class basics
+**Key concepts:** `std::string`, `std::cin`, `std::cout`, class basics, static members
 </details>
 
 <details>
@@ -91,8 +97,9 @@ make
 | ex03 | Weapon class with references |
 | ex04 | File content replacement |
 | ex05 | Harl - Pointers to member functions |
+| ex06 | Harl filter - Switch statements |
 
-**Key concepts:** `new`, `delete`, references, file streams
+**Key concepts:** `new`, `delete`, references, file streams, switch
 </details>
 
 <details>
@@ -145,7 +152,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 ## 👤 Author
 
-| [<img src="https://github.com/DKOK01.png" width="100px;"/><br /><sub><b>Your Name</b></sub>](https://github.com/DKOK01) |
+| [<img src="https://github.com/DKOK01.png" width="100px;"/><br /><sub><b>Ayman Sadeq</b></sub>](https://github.com/DKOK01) |
 | :---: |
 
 <p align="center">
