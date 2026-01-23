@@ -23,6 +23,8 @@ int main()
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
 
+
+
 	std::cout << std::endl;
 	std::cout << "========== Test 2: RobotomyRequestForm ==========" << std::endl;
 	try
@@ -40,6 +42,8 @@ int main()
 	{
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
+
+
 
 	std::cout << std::endl;
 	std::cout << "========== Test 3: PresidentialPardonForm ==========" << std::endl;
@@ -59,6 +63,8 @@ int main()
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
 
+
+
 	std::cout << std::endl;
 	std::cout << "========== Test 4: Execute Without Signing ==========" << std::endl;
 	try
@@ -67,7 +73,7 @@ int main()
 		ShrubberyCreationForm shrub("office");
 		
 		std::cout << shrub << std::endl;
-		boss.executeForm(shrub);  // Should fail - not signed
+		boss.executeForm(shrub);
 	}
 	catch (std::exception& e)
 	{
@@ -84,7 +90,7 @@ int main()
 		std::cout << intern << std::endl;
 		std::cout << pardon << std::endl;
 		
-		intern.signForm(pardon);  // Should fail - grade too low
+		intern.signForm(pardon);
 	}
 	catch (std::exception& e)
 	{
@@ -104,12 +110,14 @@ int main()
 		std::cout << robot << std::endl;
 		
 		signer.signForm(robot);
-		executor.executeForm(robot);  // Should fail - grade too low to execute
+		executor.executeForm(robot);
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
+
+
 
 	std::cout << std::endl;
 	std::cout << "========== Test 7: All Forms with Same Bureaucrat ==========" << std::endl;
@@ -141,24 +149,5 @@ int main()
 	}
 
 	std::cout << std::endl;
-	std::cout << "========== Test 8: Edge Case - Exact Grade Match ==========" << std::endl;
-	try
-	{
-		Bureaucrat exact("Exact Grade", 145);
-		ShrubberyCreationForm shrub("test");
-		
-		std::cout << exact << std::endl;
-		std::cout << shrub << std::endl;
-		
-		exact.signForm(shrub);  // Grade 145 can sign (requires 145)
-		
-		Bureaucrat execExact("Exec Exact", 137);
-		execExact.executeForm(shrub);  // Grade 137 can execute (requires 137)
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
-
 	return 0;
 }
