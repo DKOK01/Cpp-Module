@@ -1,0 +1,164 @@
+#include "Bureaucrat.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
+
+int main()
+{
+	std::cout << "========== Test 1: ShrubberyCreationForm ==========" << std::endl;
+	try
+	{
+		Bureaucrat gardener("Gardener", 130);
+		ShrubberyCreationForm shrub("home");
+		
+		std::cout << gardener << std::endl;
+		std::cout << shrub << std::endl;
+		
+		gardener.signForm(shrub);
+		gardener.executeForm(shrub);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+	std::cout << "========== Test 2: RobotomyRequestForm ==========" << std::endl;
+	try
+	{
+		Bureaucrat scientist("Dr. Frankenstein", 40);
+		RobotomyRequestForm robot("Bender");
+		
+		std::cout << scientist << std::endl;
+		std::cout << robot << std::endl;
+		
+		scientist.signForm(robot);
+		scientist.executeForm(robot);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+	std::cout << "========== Test 3: PresidentialPardonForm ==========" << std::endl;
+	try
+	{
+		Bureaucrat president("President", 1);
+		PresidentialPardonForm pardon("Arthur Dent");
+		
+		std::cout << president << std::endl;
+		std::cout << pardon << std::endl;
+		
+		president.signForm(pardon);
+		president.executeForm(pardon);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+	std::cout << "========== Test 4: Execute Without Signing ==========" << std::endl;
+	try
+	{
+		Bureaucrat boss("Boss", 1);
+		ShrubberyCreationForm shrub("office");
+		
+		std::cout << shrub << std::endl;
+		boss.executeForm(shrub);  // Should fail - not signed
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+	std::cout << "========== Test 5: Grade Too Low to Sign ==========" << std::endl;
+	try
+	{
+		Bureaucrat intern("Intern", 150);
+		PresidentialPardonForm pardon("Criminal");
+		
+		std::cout << intern << std::endl;
+		std::cout << pardon << std::endl;
+		
+		intern.signForm(pardon);  // Should fail - grade too low
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+	std::cout << "========== Test 6: Grade Too Low to Execute ==========" << std::endl;
+	try
+	{
+		Bureaucrat signer("High Signer", 20);
+		Bureaucrat executor("Low Executor", 100);
+		RobotomyRequestForm robot("Target");
+		
+		std::cout << signer << std::endl;
+		std::cout << executor << std::endl;
+		std::cout << robot << std::endl;
+		
+		signer.signForm(robot);
+		executor.executeForm(robot);  // Should fail - grade too low to execute
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+	std::cout << "========== Test 7: All Forms with Same Bureaucrat ==========" << std::endl;
+	try
+	{
+		Bureaucrat ceo("CEO", 1);
+		
+		ShrubberyCreationForm shrub("garden");
+		RobotomyRequestForm robot("Employee");
+		PresidentialPardonForm pardon("Prisoner");
+		
+		std::cout << ceo << std::endl;
+		std::cout << std::endl;
+		
+		ceo.signForm(shrub);
+		ceo.executeForm(shrub);
+		std::cout << std::endl;
+		
+		ceo.signForm(robot);
+		ceo.executeForm(robot);
+		std::cout << std::endl;
+		
+		ceo.signForm(pardon);
+		ceo.executeForm(pardon);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	std::cout << std::endl;
+	std::cout << "========== Test 8: Edge Case - Exact Grade Match ==========" << std::endl;
+	try
+	{
+		Bureaucrat exact("Exact Grade", 145);
+		ShrubberyCreationForm shrub("test");
+		
+		std::cout << exact << std::endl;
+		std::cout << shrub << std::endl;
+		
+		exact.signForm(shrub);  // Grade 145 can sign (requires 145)
+		
+		Bureaucrat execExact("Exec Exact", 137);
+		execExact.executeForm(shrub);  // Grade 137 can execute (requires 137)
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Exception: " << e.what() << std::endl;
+	}
+
+	return 0;
+}
