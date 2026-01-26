@@ -19,6 +19,6 @@ clean:
 	rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) *_shrubbery
 
 re: fclean all
