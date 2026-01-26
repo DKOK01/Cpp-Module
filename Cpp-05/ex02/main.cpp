@@ -117,37 +117,6 @@ int main()
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
 
-
-
-	std::cout << std::endl;
-	std::cout << "========== Test 7: All Forms with Same Bureaucrat ==========" << std::endl;
-	try
-	{
-		Bureaucrat ceo("CEO", 1);
-		
-		ShrubberyCreationForm shrub("garden");
-		RobotomyRequestForm robot("Employee");
-		PresidentialPardonForm pardon("Prisoner");
-		
-		std::cout << ceo << std::endl;
-		std::cout << std::endl;
-		
-		ceo.signForm(shrub);
-		ceo.executeForm(shrub);
-		std::cout << std::endl;
-		
-		ceo.signForm(robot);
-		ceo.executeForm(robot);
-		std::cout << std::endl;
-		
-		ceo.signForm(pardon);
-		ceo.executeForm(pardon);
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
-
 	std::cout << std::endl;
 	return 0;
 }

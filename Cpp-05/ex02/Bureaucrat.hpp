@@ -5,7 +5,7 @@
 #include <iostream>
 #include <exception>
 
-class AForm;  // Forward declaration
+class AForm;
 
 class Bureaucrat
 {

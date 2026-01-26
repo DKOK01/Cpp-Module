@@ -40,9 +40,15 @@ const std::string& RobotomyRequestForm::getTarget() const
 
 void RobotomyRequestForm::executeAction() const
 {
+	static bool seeded = false;
+	if (!seeded)
+	{
+		std::srand(std::time(NULL));
+		seeded = true;
+	}
+
 	std::cout << "* DRILLING NOISES * Bzzzzz... Brrrrr... Drrrrr..." << std::endl;
 	
-	std::srand(std::time(NULL));
 	if (std::rand() % 2 == 0)
 		std::cout << _target << " has been robotomized successfully!" << std::endl;
 	else
