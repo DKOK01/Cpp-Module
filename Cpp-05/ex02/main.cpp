@@ -50,7 +50,7 @@ int main()
 	try
 	{
 		Bureaucrat president("President", 1);
-		PresidentialPardonForm pardon("Arthur Dent");
+		PresidentialPardonForm pardon("killer");
 		
 		std::cout << president << std::endl;
 		std::cout << pardon << std::endl;
@@ -72,6 +72,7 @@ int main()
 		Bureaucrat boss("Boss", 1);
 		ShrubberyCreationForm shrub("office");
 		
+		std::cout << boss << std::endl;
 		std::cout << shrub << std::endl;
 		boss.executeForm(shrub);
 	}
