@@ -7,6 +7,12 @@
 
 class Intern
 {
+private:
+	// Helper functions for form creation
+	AForm*	createShrubbery(const std::string& target);
+	AForm*	createRobotomy(const std::string& target);
+	AForm*	createPresidential(const std::string& target);
+
 public:
 	// Orthodox Canonical Form
 	Intern();
@@ -17,11 +23,12 @@ public:
 	// Member function
 	AForm*	makeForm(const std::string& formName, const std::string& target);
 
-private:
-	// Helper function type for form creation
-	AForm*	createShrubbery(const std::string& target);
-	AForm*	createRobotomy(const std::string& target);
-	AForm*	createPresidential(const std::string& target);
+	// Exception
+	class FormNotFoundException : public std::exception
+	{
+	public:
+		const char* what() const throw();
+	};
 };
 
 #endif

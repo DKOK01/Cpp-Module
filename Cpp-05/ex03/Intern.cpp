@@ -23,6 +23,8 @@ Intern::~Intern()
 {
 }
 
+
+
 // Private helper functions
 AForm* Intern::createShrubbery(const std::string& target)
 {
@@ -39,7 +41,9 @@ AForm* Intern::createPresidential(const std::string& target)
 	return new PresidentialPardonForm(target);
 }
 
-// Main function - uses array of function pointers (NO if/else chain!)
+
+
+// Main member function
 AForm* Intern::makeForm(const std::string& formName, const std::string& target)
 {
 	// Array of form names
@@ -68,6 +72,11 @@ AForm* Intern::makeForm(const std::string& formName, const std::string& target)
 	}
 
 	// Form not found
-	std::cout << "Intern cannot create form: \"" << formName << "\" does not exist." << std::endl;
-	return NULL;
+	throw FormNotFoundException();
+}
+
+// Exception
+const char* Intern::FormNotFoundException::what() const throw()
+{
+	return "Form type not found!";
 }
