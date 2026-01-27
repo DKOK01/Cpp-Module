@@ -28,7 +28,7 @@ int main()
 	std::cout << "\n=== Robotomy Request ===" << std::endl;
 	try
 	{
-		AForm* robot = intern.makeForm("robotomy request", "Bender");
+		AForm* robot = intern.makeForm("robotomy request", "robot");
 		boss.signForm(*robot);
 		boss.executeForm(*robot);
 		delete robot;
