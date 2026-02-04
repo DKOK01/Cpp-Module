@@ -5,27 +5,35 @@ ScalarConverter::ScalarConverter(const ScalarConverter& other) { (void)other; }
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other) { (void)other; return *this; }
 ScalarConverter::~ScalarConverter() {}
 
+
+
 static bool isChar(const std::string& s) {
 	return s.length() == 1 && !std::isdigit(s[0]);
 }
 
 static bool isInt(const std::string& s) {
 	size_t i = 0;
-	if (s[i] == '-' || s[i] == '+') i++;
-	if (i == s.length()) return false;
+	if (s[i] == '-' || s[i] == '+')
+		i++;
+	if (i == s.length())
+		return false;
 	while (i < s.length()) {
-		if (!std::isdigit(s[i])) return false;
+		if (!std::isdigit(s[i]))
+			return false;
 		i++;
 	}
 	return true;
 }
 
 static bool isFloat(const std::string& s) {
-	if (s == "-inff" || s == "+inff" || s == "nanf") return true;
+	if (s == "-inff" || s == "+inff" || s == "nanf")
+		return true;
 	size_t i = 0;
 	bool dot = false;
-	if (s[i] == '-' || s[i] == '+') i++;
-	if (i == s.length()) return false;
+	if (s[i] == '-' || s[i] == '+')
+		i++;
+	if (i == s.length())
+		return false;
 	while (i < s.length() - 1) {
 		if (s[i] == '.') {
 			if (dot) return false;
@@ -37,20 +45,26 @@ static bool isFloat(const std::string& s) {
 }
 
 static bool isDouble(const std::string& s) {
-	if (s == "-inf" || s == "+inf" || s == "nan") return true;
+	if (s == "-inf" || s == "+inf" || s == "nan")
+		return true;
 	size_t i = 0;
 	bool dot = false;
-	if (s[i] == '-' || s[i] == '+') i++;
-	if (i == s.length()) return false;
+	if (s[i] == '-' || s[i] == '+')
+		i++;
+	if (i == s.length())
+		return false;
 	while (i < s.length()) {
 		if (s[i] == '.') {
 			if (dot) return false;
 			dot = true;
-		} else if (!std::isdigit(s[i])) return false;
+		} else if (!std::isdigit(s[i]))
+			return false;
 		i++;
 	}
 	return dot;
 }
+
+
 
 static void printChar(double d, bool impossible) {
 	std::cout << "char: ";
@@ -89,13 +103,14 @@ static void printDouble(double d) {
 		std::cout << d << std::endl;
 }
 
+
+
 void ScalarConverter::convert(const std::string& literal) {
-	double d;
+	double d = 0;
 	bool impossible = false;
 
 	if (literal.empty()) {
 		impossible = true;
-		d = 0;
 	} else if (isChar(literal)) {
 		d = static_cast<double>(literal[0]);
 	} else if (isInt(literal)) {
@@ -109,7 +124,6 @@ void ScalarConverter::convert(const std::string& literal) {
 		d = std::strtod(literal.c_str(), NULL);
 	} else {
 		impossible = true;
-		d = 0;
 	}
 
 	printChar(d, impossible);
