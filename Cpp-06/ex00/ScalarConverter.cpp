@@ -86,8 +86,12 @@ static void printInt(double d, bool impossible) {
 		std::cout << static_cast<int>(d) << std::endl;
 }
 
-static void printFloat(double d) {
+static void printFloat(double d, bool impossible) {
 	std::cout << "float: ";
+	if (impossible) {
+		std::cout << "impossible" << std::endl;
+		return;
+    }
 	float f = static_cast<float>(d);
 	if (f == static_cast<int>(f) && !std::isinf(f) && !std::isnan(f))
 		std::cout << std::fixed << std::setprecision(1) << f << "f" << std::endl;
@@ -95,8 +99,12 @@ static void printFloat(double d) {
 		std::cout << f << "f" << std::endl;
 }
 
-static void printDouble(double d) {
+static void printDouble(double d, bool impossible) {
 	std::cout << "double: ";
+	if (impossible) {
+		std::cout << "impossible" << std::endl;
+		return;
+    }
 	if (d == static_cast<int>(d) && !std::isinf(d) && !std::isnan(d))
 		std::cout << std::fixed << std::setprecision(1) << d << std::endl;
 	else
@@ -114,10 +122,7 @@ void ScalarConverter::convert(const std::string& literal) {
 	} else if (isChar(literal)) {
 		d = static_cast<double>(literal[0]);
 	} else if (isInt(literal)) {
-		long l = std::strtol(literal.c_str(), NULL, 10);
-		if (l < std::numeric_limits<int>::min() || l > std::numeric_limits<int>::max())
-			impossible = true;
-		d = static_cast<double>(l);
+		d = std::strtod(literal.c_str(), NULL);
 	} else if (isFloat(literal)) {
 		d = static_cast<double>(std::strtod(literal.c_str(), NULL));
 	} else if (isDouble(literal)) {
@@ -128,11 +133,6 @@ void ScalarConverter::convert(const std::string& literal) {
 
 	printChar(d, impossible);
 	printInt(d, impossible);
-	if (impossible) {
-		std::cout << "float: impossible" << std::endl;
-		std::cout << "double: impossible" << std::endl;
-	} else {
-		printFloat(d);
-		printDouble(d);
-	}
+	printFloat(d, impossible);
+	printDouble(d, impossible);
 }
