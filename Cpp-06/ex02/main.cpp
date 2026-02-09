@@ -45,8 +45,7 @@ void identify(Base& p) {
 		std::cout << "C" << std::endl;
 		return;
 	} catch (...) {}
-	
-	std::cout << "Unknown" << std::endl;
+
 }
 
 int main() {
