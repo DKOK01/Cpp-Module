@@ -24,31 +24,31 @@ int main(void)
 {
 	std::cout << "=== Int array ===" << std::endl;
 	int intArr[] = {1, 2, 3, 4, 5};
-	::iter(intArr, 5, printElement<int>);
+	iter(intArr, 5, printElement<int>);
 
 	std::cout << "\n=== After increment ===" << std::endl;
-	::iter(intArr, 5, increment<int>);
-	::iter(intArr, 5, printElement<int>);
+	iter(intArr, 5, increment<int>);
+	iter(intArr, 5, printElement<int>);
 
 	std::cout << "\n=== String array ===" << std::endl;
 	std::string strArr[] = {"hello", "world", "foo", "bar"};
-	::iter(strArr, 4, printElement<std::string>);
+	iter(strArr, 4, printElement<std::string>);
 
 	std::cout << "\n=== After toUpper ===" << std::endl;
-	::iter(strArr, 4, toUpper);
-	::iter(strArr, 4, printElement<std::string>);
+	iter(strArr, 4, toUpper);
+	iter(strArr, 4, printElement<std::string>);
 
 	std::cout << "\n=== Const int array ===" << std::endl;
 	int const constArr[] = {10, 20, 30};
-	::iter(constArr, 3, printElement<int const>);
+	iter(constArr, 3, printElement<int const>);
 
 	std::cout << "\n=== Double array ===" << std::endl;
 	double dblArr[] = {1.1, 2.2, 3.3};
-	::iter(dblArr, 3, printElement<double>);
+	iter(dblArr, 3, printElement<double>);
 
 	std::cout << "\n=== Char array ===" << std::endl;
 	char charArr[] = {'a', 'b', 'c', 'd'};
-	::iter(charArr, 4, printElement<char>);
+	iter(charArr, 4, printElement<char>);
 
 	return 0;
 }
