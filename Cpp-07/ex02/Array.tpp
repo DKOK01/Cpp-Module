@@ -14,15 +14,15 @@ Array<T>::Array(Array const &src) : _array(NULL), _size(0)
 }
 
 template <typename T>
-Array<T> &Array<T>::operator=(Array const &rhs)
+Array<T> &Array<T>::operator=(Array const &other)
 {
-	if (this != &rhs)
+	if (this != &other)
 	{
 		delete[] _array;
-		_size = rhs._size;
+		_size = other._size;
 		_array = new T[_size]();
 		for (unsigned int i = 0; i < _size; i++)
-			_array[i] = rhs._array[i];
+			_array[i] = other._array[i];
 	}
 	return *this;
 }
