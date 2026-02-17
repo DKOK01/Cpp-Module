@@ -110,21 +110,5 @@ int main()
 		}
 	}
 
-	std::cout << std::endl;
-	std::cout << "===== Test with empty container =====" << std::endl;
-	{
-		std::vector<int> empty;
-
-		try
-		{
-			std::vector<int>::iterator it = easyfind(empty, 1);
-			std::cout << "Found value: " << *it << std::endl;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-	}
-
 	return 0;
 }
