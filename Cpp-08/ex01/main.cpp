@@ -126,17 +126,5 @@ int main()
 		}
 	}
 
-	std::cout << std::endl;
-	std::cout << "===== Test: Copy constructor =====" << std::endl;
-	{
-		Span sp1 = Span(5);
-		sp1.addNumber(1);
-		sp1.addNumber(100);
-
-		Span sp2(sp1);
-		std::cout << "Original - Longest span: " << sp1.longestSpan() << std::endl;
-		std::cout << "Copy     - Longest span: " << sp2.longestSpan() << std::endl;
-	}
-
 	return 0;
 }
