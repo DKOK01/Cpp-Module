@@ -1,6 +1,7 @@
 #ifndef SPAN_HPP
 #define SPAN_HPP
 
+#include <iostream>
 #include <vector>
 #include <exception>
 #include <algorithm>
@@ -12,20 +13,18 @@ private:
 	std::vector<int>	_numbers;
 
 public:
-	// Orthodox Canonical Form
 	Span();
 	Span(unsigned int n);
 	Span(const Span& other);
 	Span& operator=(const Span& other);
 	~Span();
 
-	// Member functions
 	void	addNumber(int number);
 
 	template <typename InputIterator>
 	void	addRange(InputIterator begin, InputIterator end)
 	{
-		unsigned int distance = 0;
+		unsigned int	distance = 0;
 		for (InputIterator tmp = begin; tmp != end; ++tmp)
 			++distance;
 		if (_numbers.size() + distance > _maxSize)
