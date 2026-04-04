@@ -1,130 +1,78 @@
 #include "Span.hpp"
 #include <iostream>
 #include <vector>
-#include <cstdlib>
+#include <list>
 #include <ctime>
+#include <cstdlib>
 
 int main()
 {
-	std::cout << "===== Subject test =====" << std::endl;
-	{
-		Span sp = Span(5);
+    std::cout << "\n--- Subject Example Test ---" << std::endl;
+    try {
+        Span sp = Span(5);
+        sp.addNumber(6);
+        sp.addNumber(3);
+        sp.addNumber(17);
+        sp.addNumber(9);
+        sp.addNumber(11);
+        std::cout << "Shortest: " << sp.shortestSpan() << std::endl; // Expected: 2
+        std::cout << "Longest:  " << sp.longestSpan() << std::endl;  // Expected: 14
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 
-		sp.addNumber(6);
-		sp.addNumber(3);
-		sp.addNumber(17);
-		sp.addNumber(9);
-		sp.addNumber(11);
+    std::cout << "\n--- Exception: Full Span Test ---" << std::endl;
+    try {
+        Span sp(2);
+        sp.addNumber(1);
+        sp.addNumber(2);
+        sp.addNumber(3); // Should throw
+    } catch (const std::exception& e) {
+        std::cerr << "Caught expected error: " << e.what() << std::endl;
+    }
 
-		std::cout << sp.shortestSpan() << std::endl;
-		std::cout << sp.longestSpan() << std::endl;
-	}
+    std::cout << "\n--- Exception: Not Enough Numbers Test ---" << std::endl;
+    try {
+        Span sp(5);
+        sp.addNumber(42);
+        std::cout << sp.shortestSpan() << std::endl; // Should throw
+    } catch (const std::exception& e) {
+        std::cerr << "Caught expected error: " << e.what() << std::endl;
+    }
 
+    std::cout << "\n--- Range Add Test (using std::list) ---" << std::endl;
+    try {
+        std::list<int> myList;
+        myList.push_back(100);
+        myList.push_back(200);
+        myList.push_back(300);
 
+        Span sp(10);
+        sp.addRange(myList.begin(), myList.end());
+        std::cout << "Added 3 numbers from a list. Current size: 3" << std::endl;
+        std::cout << "Shortest: " << sp.shortestSpan() << std::endl;
+        std::cout << "Longest:  " << sp.longestSpan() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 
-	std::cout << std::endl;
-	std::cout << "===== Test: Span full exception =====" << std::endl;
-	{
-		Span sp = Span(3);
-		sp.addNumber(1);
-		sp.addNumber(2);
-		sp.addNumber(3);
+    std::cout << "\n--- Big Load Test: 10,000 Numbers ---" << std::endl;
+    try {
+        unsigned int n = 10000;
+        Span sp(n);
+        std::vector<int> v;
 
-		try
-		{
-			sp.addNumber(4);
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-	}
+        std::srand(std::time(NULL));
+        for (unsigned int i = 0; i < n; ++i)
+            v.push_back(std::rand());
 
+        sp.addRange(v.begin(), v.end());
+        std::cout << "Successfully added " << n << " numbers." << std::endl;
+        std::cout << "Shortest: " << sp.shortestSpan() << std::endl;
+        std::cout << "Longest:  " << sp.longestSpan() << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << e.what() << std::endl;
+    }
 
-
-
-	std::cout << std::endl;
-	std::cout << "===== Test: No span (empty / one element) =====" << std::endl;
-	{
-		Span sp = Span(5);
-
-		try
-		{
-			sp.shortestSpan();
-		}
-		catch (std::exception& e)
-		{
-			std::cout << "Empty: " << e.what() << std::endl;
-		}
-
-		sp.addNumber(42);
-
-		try
-		{
-			sp.longestSpan();
-		}
-		catch (std::exception& e)
-		{
-			std::cout << "One element: " << e.what() << std::endl;
-		}
-	}
-
-
-
-
-	std::cout << std::endl;
-	std::cout << "===== Test: 10,000 numbers =====" << std::endl;
-	{
-		Span sp = Span(10000);
-
-		std::srand(std::time(NULL));
-		for (int i = 0; i < 10000; i++)
-			sp.addNumber(std::rand());
-
-		std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
-		std::cout << "Longest span:  " << sp.longestSpan() << std::endl;
-	}
-
-
-
-
-	std::cout << std::endl;
-	std::cout << "===== Test: addRange with iterators =====" << std::endl;
-	{
-		Span sp = Span(10);
-
-		std::vector<int> vec;
-		for (int i = 0; i < 5; i++)
-			vec.push_back(i * 10);
-
-		sp.addRange(vec.begin(), vec.end());
-
-		std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
-		std::cout << "Longest span:  " << sp.longestSpan() << std::endl;
-	}
-
-
-
-
-	std::cout << std::endl;
-	std::cout << "===== Test: addRange overflow =====" << std::endl;
-	{
-		Span sp = Span(3);
-		sp.addNumber(1);
-
-		std::vector<int> vec;
-		for (int i = 0; i < 5; i++)
-			vec.push_back(i);
-
-		try
-		{
-			sp.addRange(vec.begin(), vec.end());
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-		}
-	}
-
-	return 0;
+    return 0;
 }

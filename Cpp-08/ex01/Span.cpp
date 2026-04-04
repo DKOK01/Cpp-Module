@@ -67,5 +67,5 @@ const char* Span::SpanFullException::what() const throw()
 
 const char* Span::NoSpanException::what() const throw()
 {
-	return "Cannot find span: not enough numbers stored";
+	return "Cannot find span: Not enough numbers stored";
 }
