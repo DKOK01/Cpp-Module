@@ -1,7 +1,5 @@
 #include "Span.hpp"
 
-// Orthodox Canonical Form
-
 Span::Span() : _maxSize(0) {}
 
 Span::Span(unsigned int n) : _maxSize(n) {}
@@ -22,8 +20,6 @@ Span::~Span() {}
 
 
 
-// Member functions
-
 void	Span::addNumber(int number)
 {
 	if (_numbers.size() >= _maxSize)
@@ -39,10 +35,10 @@ unsigned int	Span::shortestSpan() const
 	std::vector<int> sorted = _numbers;
 	std::sort(sorted.begin(), sorted.end());
 
-	unsigned int minSpan = static_cast<unsigned int>(sorted[1] - sorted[0]);
+	unsigned int minSpan = static_cast<unsigned int>(static_cast<long>(sorted[1]) - sorted[0]);
 	for (std::size_t i = 2; i < sorted.size(); ++i)
 	{
-		unsigned int span = static_cast<unsigned int>(sorted[i] - sorted[i - 1]);
+		unsigned int span = static_cast<unsigned int>(static_cast<long>(sorted[i]) - sorted[i - 1]);
 		if (span < minSpan)
 			minSpan = span;
 	}
@@ -63,7 +59,6 @@ unsigned int	Span::longestSpan() const
 
 
 
-// Exception classes
 
 const char* Span::SpanFullException::what() const throw()
 {

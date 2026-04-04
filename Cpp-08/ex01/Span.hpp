@@ -35,7 +35,6 @@ public:
 	unsigned int	shortestSpan() const;
 	unsigned int	longestSpan() const;
 
-	// Exception classes
 	class SpanFullException : public std::exception
 	{
 	public:
