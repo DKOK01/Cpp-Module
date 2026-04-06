@@ -5,6 +5,7 @@
 #include <vector>
 #include <exception>
 #include <algorithm>
+#include <iterator>
 
 class Span
 {
@@ -24,9 +25,7 @@ public:
 	template <typename InputIterator>
 	void	addRange(InputIterator begin, InputIterator end)
 	{
-		unsigned int	distance = 0;
-		for (InputIterator tmp = begin; tmp != end; ++tmp)
-			++distance;
+		std::size_t distance = std::distance(begin, end);
 		if (_numbers.size() + distance > _maxSize)
 			throw SpanFullException();
 		_numbers.insert(_numbers.end(), begin, end);
