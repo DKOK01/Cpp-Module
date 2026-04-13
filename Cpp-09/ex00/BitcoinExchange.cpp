@@ -4,8 +4,6 @@
 #include <cstdlib>
 #include <cctype>
 
-/* ---- Orthodox Canonical Form ---- */
-
 BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
@@ -18,8 +16,6 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
 }
 
 BitcoinExchange::~BitcoinExchange() {}
-
-/* ---- Private helpers ---- */
 
 bool BitcoinExchange::_isLeapYear(int year) const {
 	return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
