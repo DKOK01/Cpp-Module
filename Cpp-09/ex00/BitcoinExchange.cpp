@@ -25,11 +25,11 @@ bool BitcoinExchange::_isLeapYear(int year) const {
 }
 
 bool BitcoinExchange::_isValidDate(const std::string& date) const {
-	// Must be exactly YYYY-MM-DD (10 chars)
+
 	if (date.length() != 10 || date[4] != '-' || date[7] != '-')
 		return false;
 
-	// All non-dash positions must be digits
+
 	for (size_t i = 0; i < 10; i++) {
 		if (i == 4 || i == 7)
 			continue;
@@ -81,6 +81,7 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
 
 
 void BitcoinExchange::processInput(const std::string& filename) {
+
 	std::ifstream file(filename.c_str());
 	if (!file.is_open()) {
 		std::cerr << "Error: could not open file." << std::endl;
@@ -88,10 +89,12 @@ void BitcoinExchange::processInput(const std::string& filename) {
 	}
 
 	std::string line;
-	std::getline(file, line); // skip header "date | value"
+	std::getline(file, line);
+	if (line != "date | value")
+		throw std::runtime_error("Error: invalid input header.");
 
 	while (std::getline(file, line)) {
-		// ---- Find delimiter " | " ----
+
 		size_t sep = line.find(" | ");
 		if (sep == std::string::npos) {
 			std::cout << "Error: bad input => " << line << std::endl;
@@ -101,28 +104,23 @@ void BitcoinExchange::processInput(const std::string& filename) {
 		std::string date		= line.substr(0, sep);
 		std::string valueStr	= line.substr(sep + 3);
 
-		// ---- Validate date ----
 		if (!_isValidDate(date)) {
 			std::cout << "Error: bad input => " << date << std::endl;
 			continue;
 		}
 
-		// ---- Parse & validate value ----
 		if (valueStr.empty()) {
 			std::cout << "Error: bad input => " << date << std::endl;
 			continue;
 		}
 
-		char  *endptr;
-		double value = std::strtod(valueStr.c_str(), &endptr);
-
-		// Nothing was parsed (e.g. only whitespace)
+		char	*endptr;
+		double	value = std::strtod(valueStr.c_str(), &endptr);
 		if (endptr == valueStr.c_str()) {
 			std::cout << "Error: bad input => " << date << std::endl;
 			continue;
 		}
 
-		// Allow only trailing whitespace after the number
 		while (*endptr) {
 			if (!std::isspace(static_cast<unsigned char>(*endptr)))
 				break;
@@ -133,7 +131,7 @@ void BitcoinExchange::processInput(const std::string& filename) {
 			continue;
 		}
 
-		// NaN check (NaN != NaN)
+
 		if (value != value) {
 			std::cout << "Error: bad input => " << date << std::endl;
 			continue;
