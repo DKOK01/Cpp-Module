@@ -7,7 +7,7 @@
 BitcoinExchange::BitcoinExchange() {}
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
-	: _database(other._database) {}
+: _database(other._database) {}
 
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
 	if (this != &other)
@@ -16,6 +16,9 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
 }
 
 BitcoinExchange::~BitcoinExchange() {}
+
+
+
 
 bool BitcoinExchange::_isLeapYear(int year) const {
 	return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
@@ -48,7 +51,8 @@ bool BitcoinExchange::_isValidDate(const std::string& date) const {
 	return day <= daysInMonth[month - 1];
 }
 
-/* ---- Public methods ---- */
+
+
 
 void BitcoinExchange::loadDatabase(const std::string& filename) {
 	std::ifstream file(filename.c_str());
@@ -56,12 +60,11 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
 		throw std::runtime_error("Error: could not open database.");
 
 	std::string line;
-	std::getline(file, line); // skip header "date,exchange_rate"
+	std::getline(file, line);
+	if (line != "date,exchange_rate")
+        throw std::runtime_error("Error: invalid database header.");
 
 	while (std::getline(file, line)) {
-		// Strip trailing \r (Windows line endings)
-		if (!line.empty() && line[line.size() - 1] == '\r')
-			line.erase(line.size() - 1);
 
 		size_t comma = line.find(',');
 		if (comma == std::string::npos)
@@ -69,11 +72,13 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
 
 		std::string date    = line.substr(0, comma);
 		std::string rateStr = line.substr(comma + 1);
+
 		float rate = static_cast<float>(std::strtod(rateStr.c_str(), NULL));
 		_database[date] = rate;
 	}
 	file.close();
 }
+
 
 void BitcoinExchange::processInput(const std::string& filename) {
 	std::ifstream file(filename.c_str());
@@ -86,10 +91,6 @@ void BitcoinExchange::processInput(const std::string& filename) {
 	std::getline(file, line); // skip header "date | value"
 
 	while (std::getline(file, line)) {
-		// Strip trailing \r
-		if (!line.empty() && line[line.size() - 1] == '\r')
-			line.erase(line.size() - 1);
-
 		// ---- Find delimiter " | " ----
 		size_t sep = line.find(" | ");
 		if (sep == std::string::npos) {
@@ -97,8 +98,8 @@ void BitcoinExchange::processInput(const std::string& filename) {
 			continue;
 		}
 
-		std::string date     = line.substr(0, sep);
-		std::string valueStr = line.substr(sep + 3);
+		std::string date		= line.substr(0, sep);
+		std::string valueStr	= line.substr(sep + 3);
 
 		// ---- Validate date ----
 		if (!_isValidDate(date)) {
