@@ -8,6 +8,9 @@ class BitcoinExchange {
 private:
 	std::map<std::string, float> _database;
 
+	bool	isLeapYear(int year) const;
+	bool	isValidDate(const std::string& date) const;
+	
 public:
 	BitcoinExchange();
 	BitcoinExchange(const BitcoinExchange& other);

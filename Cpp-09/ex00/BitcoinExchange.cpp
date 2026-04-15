@@ -20,11 +20,11 @@ BitcoinExchange::~BitcoinExchange() {}
 
 
 
-bool	isLeapYear(int year) {
+bool BitcoinExchange::isLeapYear(int year) const {
 	return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-bool	isValidDate(const std::string& date) {
+bool BitcoinExchange::isValidDate(const std::string& date) const {
 
 	if (date.length() != 10 || date[4] != '-' || date[7] != '-')
 		return false;
@@ -62,7 +62,7 @@ void BitcoinExchange::loadDatabase(const std::string& filename) {
 	std::string line;
 	std::getline(file, line);
 	if (line != "date,exchange_rate")
-        throw std::runtime_error("Error: invalid database header.");
+        throw	std::runtime_error("Error: invalid database header.");
 
 	while (std::getline(file, line)) {
 
@@ -147,16 +147,12 @@ void BitcoinExchange::processInput(const std::string& filename) {
 			continue;
 		}
 
-		// ---- Look up exchange rate ----
-		// lower_bound returns iterator to first element >= date
 		std::map<std::string, float>::iterator it = _database.lower_bound(date);
 
 		if (it != _database.end() && it->first == date) {
-			// exact match — use it
 		} else if (it != _database.begin()) {
-			--it; // closest earlier date
+			--it;
 		} else {
-			// date is before all entries in the database
 			std::cout << "Error: bad input => " << date << std::endl;
 			continue;
 		}
