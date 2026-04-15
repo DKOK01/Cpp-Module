@@ -20,11 +20,11 @@ BitcoinExchange::~BitcoinExchange() {}
 
 
 
-bool BitcoinExchange::_isLeapYear(int year) const {
+bool	isLeapYear(int year) {
 	return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-bool BitcoinExchange::_isValidDate(const std::string& date) const {
+bool	isValidDate(const std::string& date) {
 
 	if (date.length() != 10 || date[4] != '-' || date[7] != '-')
 		return false;
@@ -45,7 +45,7 @@ bool BitcoinExchange::_isValidDate(const std::string& date) const {
 		return false;
 
 	int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	if (_isLeapYear(year))
+	if (isLeapYear(year))
 		daysInMonth[1] = 29;
 
 	return day <= daysInMonth[month - 1];
@@ -104,7 +104,7 @@ void BitcoinExchange::processInput(const std::string& filename) {
 		std::string date		= line.substr(0, sep);
 		std::string valueStr	= line.substr(sep + 3);
 
-		if (!_isValidDate(date)) {
+		if (!isValidDate(date)) {
 			std::cout << "Error: bad input => " << date << std::endl;
 			continue;
 		}
