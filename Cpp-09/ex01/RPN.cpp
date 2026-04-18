@@ -53,7 +53,6 @@ void RPN::evaluate(const std::string& expression) {
 		if (_isOperator(token)) {
 			_applyOperator(token);
 		} else {
-			// Validate: must be a single digit (0-9)
 			if (token.length() != 1 || token[0] < '0' || token[0] > '9')
 				throw std::runtime_error("Error");
 			_stack.push(token[0] - '0');
