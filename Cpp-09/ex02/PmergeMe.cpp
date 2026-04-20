@@ -99,14 +99,34 @@ void PmergeMe::_sortVector(std::vector<int>& arr) {
 	// 5. Insert pend[0] at beginning (b1 < a1, always true)
 	mainChain.insert(mainChain.begin(), pend[0]);
 
+	// Track the position of each winner in mainChain
+	// After inserting B1: mainChain = [B1, A1, A2, A3, ...]
+	// So A_k is at index k + 1
+	std::vector<size_t> winnerPos;
+	for (size_t i = 0; i < pend.size(); i++)
+		winnerPos.push_back(i + 1);
+
 	// 6. Insert remaining pend elements in Jacobsthal order
+	//    with BOUNDED binary search (only search up to paired winner)
 	std::vector<size_t> order = _jacobsthalOrder(pend.size());
 	for (size_t i = 0; i < order.size(); i++) {
 		if (order[i] == 0 || order[i] >= pend.size()) continue;
-		int val = pend[order[i]];
+		size_t idx = order[i];
+		int val = pend[idx];
+
+		// Search only from begin to the winner's position (bounded!)
+		std::vector<int>::iterator bound = mainChain.begin() + winnerPos[idx];
 		std::vector<int>::iterator pos =
-			std::lower_bound(mainChain.begin(), mainChain.end(), val);
+			std::lower_bound(mainChain.begin(), bound, val);
+
+		size_t insertPos = pos - mainChain.begin();
 		mainChain.insert(pos, val);
+
+		// Update all winner positions >= insertPos (they shifted right by 1)
+		for (size_t j = 0; j < winnerPos.size(); j++) {
+			if (winnerPos[j] >= insertPos)
+				winnerPos[j]++;
+		}
 	}
 
 	// 7. Insert straggler
@@ -161,13 +181,29 @@ void PmergeMe::_sortDeque(std::deque<int>& arr) {
 
 	mainChain.push_front(pend[0]);
 
+	// Track the position of each winner in mainChain
+	std::vector<size_t> winnerPos;
+	for (size_t i = 0; i < pend.size(); i++)
+		winnerPos.push_back(i + 1);
+
+	// Insert remaining pend elements with BOUNDED binary search
 	std::vector<size_t> order = _jacobsthalOrder(pend.size());
 	for (size_t i = 0; i < order.size(); i++) {
 		if (order[i] == 0 || order[i] >= pend.size()) continue;
-		int val = pend[order[i]];
+		size_t idx = order[i];
+		int val = pend[idx];
+
+		std::deque<int>::iterator bound = mainChain.begin() + winnerPos[idx];
 		std::deque<int>::iterator pos =
-			std::lower_bound(mainChain.begin(), mainChain.end(), val);
+			std::lower_bound(mainChain.begin(), bound, val);
+
+		size_t insertPos = pos - mainChain.begin();
 		mainChain.insert(pos, val);
+
+		for (size_t j = 0; j < winnerPos.size(); j++) {
+			if (winnerPos[j] >= insertPos)
+				winnerPos[j]++;
+		}
 	}
 
 	if (hasStraggler) {
@@ -182,6 +218,7 @@ void PmergeMe::_sortDeque(std::deque<int>& arr) {
 
 
 void PmergeMe::run(int argc, char **argv) {
+
 	// Parse and validate arguments
 	for (int i = 1; i < argc; i++) {
 		char *endptr;
