@@ -100,8 +100,6 @@ void PmergeMe::_sortVector(std::vector<int>& arr) {
 	mainChain.insert(mainChain.begin(), pend[0]);
 
 	// Track the position of each winner in mainChain
-	// After inserting B1: mainChain = [B1, A1, A2, A3, ...]
-	// So A_k is at index k + 1
 	std::vector<size_t> winnerPos;
 	for (size_t i = 0; i < pend.size(); i++)
 		winnerPos.push_back(i + 1);
@@ -115,9 +113,8 @@ void PmergeMe::_sortVector(std::vector<int>& arr) {
 		int val = pend[idx];
 
 		// Search only from begin to the winner's position (bounded!)
-		std::vector<int>::iterator bound = mainChain.begin() + winnerPos[idx];
-		std::vector<int>::iterator pos =
-			std::lower_bound(mainChain.begin(), bound, val);
+		std::vector<int>::iterator	bound = mainChain.begin() + winnerPos[idx];
+		std::vector<int>::iterator	pos = std::lower_bound(mainChain.begin(), bound, val);
 
 		size_t insertPos = pos - mainChain.begin();
 		mainChain.insert(pos, val);
