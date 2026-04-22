@@ -79,7 +79,6 @@ void PmergeMe::_sortVector(std::vector<int>& arr) {
 	for (size_t i = 0; i < pairs.size(); i++)
 		largers.push_back(pairs[i].first);
 
-	std::vector<std::pair<int, int> > pool = pairs;
 	_sortVector(largers);
 
 	// 4. Build main chain and pend (recover pairings after sort)
@@ -88,10 +87,10 @@ void PmergeMe::_sortVector(std::vector<int>& arr) {
 
 	for (size_t i = 0; i < largers.size(); i++) {
 		mainChain.push_back(largers[i]);
-		for (size_t j = 0; j < pool.size(); j++) {
-			if (pool[j].first == largers[i]) {
-				pend.push_back(pool[j].second);
-				pool.erase(pool.begin() + j);
+		for (size_t j = 0; j < pairs.size(); j++) {
+			if (pairs[j].first == largers[i]) {
+				pend.push_back(pairs[j].second);
+				pairs.erase(pairs.begin() + j);
 				break;
 			}
 		}
@@ -163,7 +162,6 @@ void PmergeMe::_sortDeque(std::deque<int>& arr) {
 	for (size_t i = 0; i < pairs.size(); i++)
 		largers.push_back(pairs[i].first);
 
-	std::vector<std::pair<int, int> > pool = pairs;
 	_sortDeque(largers);
 
 	std::deque<int> mainChain;
@@ -171,10 +169,10 @@ void PmergeMe::_sortDeque(std::deque<int>& arr) {
 
 	for (size_t i = 0; i < largers.size(); i++) {
 		mainChain.push_back(largers[i]);
-		for (size_t j = 0; j < pool.size(); j++) {
-			if (pool[j].first == largers[i]) {
-				pend.push_back(pool[j].second);
-				pool.erase(pool.begin() + j);
+		for (size_t j = 0; j < pairs.size(); j++) {
+			if (pairs[j].first == largers[i]) {
+				pend.push_back(pairs[j].second);
+				pairs.erase(pairs.begin() + j);
 				break;
 			}
 		}
