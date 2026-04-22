@@ -186,12 +186,11 @@ void PmergeMe::_sortDeque(std::deque<int>& arr) {
 	std::vector<size_t> order = _jacobsthalOrder(pend.size());
 	for (size_t i = 0; i < order.size(); i++) {
 		if (order[i] == 0 || order[i] >= pend.size()) continue;
-		size_t idx = order[i];
-		int val = pend[idx];
+		size_t idx	= order[i];
+		int val 	= pend[idx];
 
 		std::deque<int>::iterator bound = mainChain.begin() + winnerPos[idx];
-		std::deque<int>::iterator pos =
-			std::lower_bound(mainChain.begin(), bound, val);
+		std::deque<int>::iterator pos = std::lower_bound(mainChain.begin(), bound, val);
 
 		size_t insertPos = pos - mainChain.begin();
 		mainChain.insert(pos, val);
